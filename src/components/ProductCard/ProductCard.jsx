@@ -7,7 +7,8 @@ export default function ProductCard({ product }) {
   const { addToCart } = useCart();
 
   function handleAdd() {
-    addToCart(product.id, quantity);
+    addToCart(product.id, quantity, product.title);
+;
   }
 
   return (

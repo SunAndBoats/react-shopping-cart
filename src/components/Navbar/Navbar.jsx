@@ -4,7 +4,7 @@ import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   const { cartItems } = useCart();
-  const totalItems = Object.values(cartItems).reduce((sum, n) => sum + n, 0);
+  const totalItems = Object.values(cartItems).reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <nav className={styles.navbar}>

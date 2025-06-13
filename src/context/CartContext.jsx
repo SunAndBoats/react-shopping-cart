@@ -9,11 +9,19 @@ export function useCart() {
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState({});
 
-  function addToCart(id, quantity = 1) {
-    setCartItems(prev => ({
-      ...prev,
-      [id]: (prev[id] || 0) + quantity,
-    }));
+  function addToCart(id, quantity = 1,title) {
+    setCartItems(prev => {
+      const existing = prev[id] || { quantity: 0, title };
+      return {
+        ...prev,
+        [id]: {
+          ...existing,
+          quantity: existing.quantity + quantity,
+          title,
+        },
+      };
+    });
+    
   }
 
   const value = { cartItems, addToCart };

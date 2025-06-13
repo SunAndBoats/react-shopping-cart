@@ -12,11 +12,12 @@ export default function Cart() {
       {isEmpty ? (
         <p className={styles.empty}>El carrito está vacío.</p>
       ) : (
-        Object.entries(cartItems).map(([id, quantity]) => (
+        Object.entries(cartItems).map(([id, item]) => (
           <div key={id} className={styles.item}>
-            Producto ID: {id} — Cantidad: {quantity}
+            {item.title} — Cantidad: {item.quantity}
           </div>
         ))
+        
       )}
     </div>
   );
