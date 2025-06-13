@@ -1,47 +1,23 @@
+import styles from "./Cart.module.css";
 import { useCart } from "../../context/CartContext";
-import { useEffect, useState } from "react";
 
 export default function Cart() {
   const { cartItems } = useCart();
-  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then(res => res.json())
-      .then(setProducts);
-  }, []);
-
-  const cartProductList = Object.entries(cartItems)
-    .map(([id, quantity]) => {
-      const product = products.find(p => p.id === parseInt(id));
-      if (!product) return null;
-      return { ...product, quantity };
-    })
-    .filter(Boolean);
-
-  const total = cartProductList.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const isEmpty = Object.keys(cartItems).length === 0;
 
   return (
-    <div>
-      <h1>Your Cart</h1>
-      {cartProductList.length === 0 ? (
-        <p>Your cart is empty.</p>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Tu carrito</h2>
+      {isEmpty ? (
+        <p className={styles.empty}>El carrito está vacío.</p>
       ) : (
-        <ul>
-          {cartProductList.map(item => (
-            <li key={item.id}>
-              {item.title} — {item.quantity} × ${item.price.toFixed(2)}
-            </li>
-          ))}
-        </ul>
+        Object.entries(cartItems).map(([id, quantity]) => (
+          <div key={id} className={styles.item}>
+            Producto ID: {id} — Cantidad: {quantity}
+          </div>
+        ))
       )}
-      <h2>Total: ${total.toFixed(2)}</h2>
-      <button disabled={cartProductList.length === 0}>
-        Proceed to Checkout
-      </button>
     </div>
   );
 }

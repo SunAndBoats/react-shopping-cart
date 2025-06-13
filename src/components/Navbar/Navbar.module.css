@@ -1,0 +1,27 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #20232a;
+    color: white;
+    padding: 1rem 2rem;
+  }
+  
+  .link {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  .cartCount {
+    background-color: crimson;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+  }
+  
